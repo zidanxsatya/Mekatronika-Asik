@@ -1,0 +1,501 @@
+/* ==========================================================================
+   DESIGN TOKENS
+   Ubah nilai-nilai di :root ini untuk mengganti skema warna/tipografi
+   secara global di seluruh halaman.
+   ========================================================================== */
+:root {
+  --bg-navy:        #0e1826;   /* latar sidebar & hero */
+  --bg-navy-soft:   #16233a;   /* panel/kartu di atas navy */
+  --bg-page:        #f5f7fa;   /* latar main content */
+  --bg-card:        #ffffff;   /* latar kartu di main content */
+
+  --accent-cyan:    #4fd1c5;   /* warna aksen utama (jejak sirkuit) */
+  --accent-amber:   #f5a623;   /* warna aksen sekunder (indikator/highlight) */
+
+  --text-light:     #e8eef5;   /* teks di atas latar gelap */
+  --text-muted-light: #8aa0bd; /* teks sekunder di atas latar gelap */
+  --text-dark:      #12202f;   /* teks di atas latar terang */
+  --text-muted-dark: #5b6b80;  /* teks sekunder di atas latar terang */
+
+  --border-soft:    #dfe6ee;
+  --border-dark:    #223349;
+
+  --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+  --font-body:    'Inter', 'Segoe UI', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
+
+  --sidebar-w:    272px;
+  --radius-md:    10px;
+  --radius-sm:    6px;
+
+  --transition-fast: 0.18s ease;
+}
+
+/* ==========================================================================
+   RESET & BASE
+   ========================================================================== */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+ul { list-style: none; margin: 0; padding: 0; }
+
+:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   APP SHELL — Sidebar + Main Content
+   ========================================================================== */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ---------- SIDEBAR ---------- */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: var(--bg-navy);
+  color: var(--text-light);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  border-right: 1px solid var(--border-dark);
+}
+
+.sidebar-top {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-bottom: 28px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.sidebar-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 14px;
+  border: 1px solid var(--border-dark);
+}
+
+.sidebar-brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  margin: 0 0 2px 0;
+  color: var(--text-light);
+}
+
+.sidebar-subbrand {
+  font-size: 0.8rem;
+  color: var(--text-muted-light);
+  margin: 0;
+}
+
+.nav-label {
+  font-size: 0.72rem;
+  color: var(--text-muted-light);
+  margin: 0 0 10px 4px;
+  font-family: var(--font-mono);
+}
+
+.sidebar-nav ul { display: flex; flex-direction: column; gap: 4px; }
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted-light);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.nav-icon {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-cyan);
+  width: 20px;
+}
+
+.nav-link:hover {
+  background: rgba(79, 209, 197, 0.08);
+  color: var(--text-light);
+}
+
+.nav-link.active {
+  background: rgba(79, 209, 197, 0.14);
+  color: var(--text-light);
+  box-shadow: inset 3px 0 0 var(--accent-cyan);
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-dark);
+  font-size: 0.78rem;
+  color: var(--text-muted-light);
+}
+
+/* ---------- HAMBURGER (mobile only, default hidden) ---------- */
+.hamburger-btn {
+  display: none;
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 50;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--bg-navy);
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.hamburger-btn span {
+  width: 20px;
+  height: 2px;
+  background: var(--text-light);
+  border-radius: 2px;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+/* Ubah ikon jadi silang saat sidebar terbuka (class 'is-open' ditambahkan oleh JS) */
+.hamburger-btn.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger-btn.is-open span:nth-child(2) { opacity: 0; }
+.hamburger-btn.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 10, 17, 0.6);
+  z-index: 30;
+}
+
+/* ==========================================================================
+   MAIN CONTENT
+   ========================================================================== */
+.main-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.section {
+  padding: 72px 56px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.section-heading h2 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  margin: 0 0 8px 0;
+  color: var(--text-dark);
+}
+
+.section-desc {
+  color: var(--text-muted-dark);
+  margin: 0 0 36px 0;
+  font-size: 1rem;
+  max-width: 60ch;
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  position: relative;
+  background: var(--bg-navy);
+  color: var(--text-light);
+  padding: 120px 56px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 420px;
+}
+
+/* Pola sirkuit tipis sebagai dekorasi latar hero — murni CSS, tanpa gambar */
+.hero-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background-image:
+    linear-gradient(90deg, rgba(79,209,197,0.08) 1px, transparent 1px),
+    linear-gradient(rgba(79,209,197,0.08) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(circle at 50% 40%, black 10%, transparent 72%);
+}
+
+.hero-inner {
+  position: relative;
+  text-align: center;
+  max-width: 640px;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent-cyan);
+  margin: 0 0 18px 0;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 700;
+  margin: 0 0 14px 0;
+  line-height: 1.1;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted-light);
+  margin: 0;
+}
+
+/* ---------- KARTU PENJELASAN + TAB ---------- */
+.explanation-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 32px;
+}
+
+.explanation-card > p {
+  margin: 0 0 28px 0;
+  line-height: 1.7;
+  color: var(--text-dark);
+  max-width: 72ch;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 10px;
+  border-bottom: 1px solid var(--border-soft);
+  padding-bottom: 20px;
+  margin-bottom: 24px;
+}
+
+.tab-btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-soft);
+  background: var(--bg-page);
+  color: var(--text-muted-dark);
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.tab-btn:hover {
+  border-color: var(--accent-cyan);
+  color: var(--text-dark);
+}
+
+.tab-btn.active {
+  background: var(--bg-navy);
+  border-color: var(--bg-navy);
+  color: var(--text-light);
+}
+
+.tab-panel.hidden { display: none; }
+
+/* ---------- KARTU GERBANG LOGIKA ---------- */
+.gate-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.gate-card {
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  background: var(--bg-page);
+}
+
+.gate-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.gate-symbol {
+  width: 60px;
+  height: 36px;
+  color: var(--accent-cyan);
+  flex-shrink: 0;
+}
+
+.gate-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin: 0;
+  color: var(--text-dark);
+}
+
+.gate-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted-dark);
+  line-height: 1.55;
+  margin: 0 0 14px 0;
+}
+
+.truth-table {
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  width: 100%;
+}
+
+.truth-table th,
+.truth-table td {
+  border: 1px solid var(--border-soft);
+  padding: 6px 10px;
+  text-align: center;
+}
+
+.truth-table th {
+  background: var(--bg-navy);
+  color: var(--accent-cyan);
+  font-weight: 500;
+}
+
+/* ---------- KUIS ---------- */
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.quiz-question {
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  background: var(--bg-page);
+}
+
+.quiz-question p.question-text {
+  font-weight: 600;
+  margin: 0 0 14px 0;
+  color: var(--text-dark);
+}
+
+.quiz-options { display: flex; flex-direction: column; gap: 8px; }
+
+.quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-soft);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.quiz-option:hover { border-color: var(--accent-cyan); }
+
+.quiz-option input { accent-color: var(--accent-cyan); }
+
+/* Status jawaban setelah tombol "Cek Jawaban" ditekan (class ditambahkan oleh JS) */
+.quiz-option.correct {
+  border-color: #2e9e6f;
+  background: rgba(46, 158, 111, 0.08);
+}
+
+.quiz-option.incorrect {
+  border-color: #d64545;
+  background: rgba(214, 69, 69, 0.08);
+}
+
+.btn-primary {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 12px 26px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--bg-navy);
+  color: var(--text-light);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.btn-primary:hover { background: #1a2b45; }
+
+.quiz-result {
+  margin-top: 18px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+}
+
+.site-footer {
+  text-align: center;
+  padding: 32px;
+  color: var(--text-muted-dark);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border-soft);
+}
+
+/* ==========================================================================
+   RESPONSIVE — Sidebar jadi menu hamburger di layar sempit
+   ========================================================================== */
+@media (max-width: 860px) {
+  .hamburger-btn { display: flex; }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 40;
+    transform: translateX(-100%);
+    transition: transform var(--transition-fast);
+    box-shadow: 4px 0 24px rgba(0,0,0,0.25);
+  }
+
+  /* Class 'is-open' ditambahkan/dihapus oleh script.js saat hamburger diklik */
+  .sidebar.is-open { transform: translateX(0); }
+
+  .sidebar-overlay.is-visible { display: block; }
+
+  .section { padding: 56px 20px; }
+
+  .hero { padding: 100px 24px 72px; min-height: 360px; }
+
+  .explanation-card { padding: 22px; }
+
+  .tab-buttons { flex-wrap: wrap; }
+}

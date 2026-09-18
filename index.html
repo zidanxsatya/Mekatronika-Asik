@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMK 56 Mekatronika — TKM</title>
+
+  <!-- Font: Space Grotesk untuk judul (kesan teknis/skematik), Inter untuk teks -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Tombol hamburger, hanya tampil di layar HP -->
+  <button id="hamburgerBtn" class="hamburger-btn" aria-label="Buka menu navigasi" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- Overlay gelap saat sidebar terbuka di mode HP -->
+  <div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+  <div class="app-shell">
+
+    <!-- ======================= SIDEBAR ======================= -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <!-- GANTI src di bawah ini dengan path logo sekolah Anda -->
+        <img src="https://placehold.co/96x96/0e1826/4fd1c5?text=LOGO" alt="Logo SMKN 56" class="sidebar-logo">
+        <!-- GANTI teks nama jurusan di bawah ini jika perlu -->
+        <p class="sidebar-brand">MEKATRONIKA</p>
+        <p class="sidebar-subbrand">SMK Negeri 56</p>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Navigasi utama">
+        <p class="nav-label">Menu</p>
+        <ul>
+          <!-- data-target harus sama dengan id section tujuan di Main Content -->
+          <li><a href="#beranda" class="nav-link active" data-target="beranda">
+            <span class="nav-icon" aria-hidden="true">01</span> Beranda
+          </a></li>
+          <li><a href="#materi" class="nav-link" data-target="materi">
+            <span class="nav-icon" aria-hidden="true">02</span> Materi
+          </a></li>
+          <li><a href="#kuis" class="nav-link" data-target="kuis">
+            <span class="nav-icon" aria-hidden="true">03</span> Kuis
+          </a></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <p>Teknik Kontrol Mekatronika</p>
+      </div>
+    </aside>
+
+    <!-- ======================= MAIN CONTENT ======================= -->
+    <main class="main-content">
+
+      <!-- ---------- HERO SECTION ---------- -->
+      <section id="beranda" class="hero">
+        <div class="hero-pattern" aria-hidden="true"></div>
+        <div class="hero-inner">
+          <p class="hero-eyebrow">Teknik Kontrol Mekatronika</p>
+          <!-- GANTI judul dan sub-judul di bawah sesuai kebutuhan -->
+          <h1 class="hero-title">SMK 56 Mekatronika</h1>
+          <p class="hero-subtitle">TKM Teknik Kontrol Mekatronika</p>
+        </div>
+      </section>
+
+      <!-- ---------- SECTION MATERI (judul) ---------- -->
+      <section id="materi" class="section section-materi">
+        <div class="section-heading">
+          <!-- GANTI judul materi di sini -->
+          <h2>Materi Gerbang Logika</h2>
+          <p class="section-desc">Dasar-dasar sistem digital pada rangkaian kontrol mekatronika.</p>
+        </div>
+
+        <!-- ---------- PENJELASAN SINGKAT ---------- -->
+        <div class="explanation-card">
+          <!-- GANTI paragraf penjelasan singkat di bawah ini -->
+          <p>
+            Gerbang logika (logic gate) adalah blok bangunan dasar dari rangkaian digital yang memproses
+            sinyal berupa nilai biner, yaitu 0 (rendah/false) dan 1 (tinggi/true). Setiap gerbang menerima
+            satu atau lebih sinyal masukan dan menghasilkan satu sinyal keluaran berdasarkan aturan logika
+            tertentu. Dalam sistem kontrol mekatronika, gerbang logika digunakan untuk mengambil keputusan
+            otomatis pada rangkaian sensor, aktuator, dan sistem kendali digital lainnya.
+          </p>
+
+          <!-- ---------- TOMBOL TAB ---------- -->
+          <div class="tab-buttons" role="tablist" aria-label="Pilihan konten materi">
+            <button class="tab-btn active" id="btnMateriLanjut" role="tab" aria-selected="true" aria-controls="panelMateriLanjut">
+              Materi Lanjut
+            </button>
+            <button class="tab-btn" id="btnKuis" role="tab" aria-selected="false" aria-controls="panelKuis">
+              Kuis
+            </button>
+          </div>
+
+          <!-- ---------- PANEL: MATERI LANJUT ---------- -->
+          <div class="tab-panel" id="panelMateriLanjut" role="tabpanel" aria-labelledby="btnMateriLanjut">
+
+            <!-- Kartu tiap gerbang logika: silakan duplikasi/ubah blok .gate-card untuk gerbang lain -->
+            <div class="gate-grid">
+
+              <article class="gate-card">
+                <div class="gate-card-head">
+                  <svg class="gate-symbol" viewBox="0 0 100 60" aria-hidden="true">
+                    <path d="M20 10 H45 A20 20 0 0 1 45 50 H20 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+                    <line x1="0" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="3"/>
+                    <line x1="0" y1="40" x2="20" y2="40" stroke="currentColor" stroke-width="3"/>
+                    <line x1="65" y1="30" x2="90" y2="30" stroke="currentColor" stroke-width="3"/>
+                  </svg>
+                  <h3>Gerbang AND</h3>
+                </div>
+                <p>Keluaran bernilai 1 hanya jika <strong>semua</strong> masukan bernilai 1.</p>
+                <table class="truth-table">
+                  <thead><tr><th>A</th><th>B</th><th>Out</th></tr></thead>
+                  <tbody>
+                    <tr><td>0</td><td>0</td><td>0</td></tr>
+                    <tr><td>0</td><td>1</td><td>0</td></tr>
+                    <tr><td>1</td><td>0</td><td>0</td></tr>
+                    <tr><td>1</td><td>1</td><td>1</td></tr>
+                  </tbody>
+                </table>
+              </article>
+
+              <article class="gate-card">
+                <div class="gate-card-head">
+                  <svg class="gate-symbol" viewBox="0 0 100 60" aria-hidden="true">
+                    <path d="M15 10 Q30 30 15 50 Q40 50 55 30 Q40 10 15 10 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+                    <line x1="0" y1="20" x2="17" y2="20" stroke="currentColor" stroke-width="3"/>
+                    <line x1="0" y1="40" x2="17" y2="40" stroke="currentColor" stroke-width="3"/>
+                    <line x1="55" y1="30" x2="90" y2="30" stroke="currentColor" stroke-width="3"/>
+                  </svg>
+                  <h3>Gerbang OR</h3>
+                </div>
+                <p>Keluaran bernilai 1 jika <strong>salah satu atau lebih</strong> masukan bernilai 1.</p>
+                <table class="truth-table">
+                  <thead><tr><th>A</th><th>B</th><th>Out</th></tr></thead>
+                  <tbody>
+                    <tr><td>0</td><td>0</td><td>0</td></tr>
+                    <tr><td>0</td><td>1</td><td>1</td></tr>
+                    <tr><td>1</td><td>0</td><td>1</td></tr>
+                    <tr><td>1</td><td>1</td><td>1</td></tr>
+                  </tbody>
+                </table>
+              </article>
+
+              <article class="gate-card">
+                <div class="gate-card-head">
+                  <svg class="gate-symbol" viewBox="0 0 100 60" aria-hidden="true">
+                    <path d="M20 12 L20 48 L55 30 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+                    <circle cx="60" cy="30" r="5" fill="none" stroke="currentColor" stroke-width="3"/>
+                    <line x1="0" y1="30" x2="20" y2="30" stroke="currentColor" stroke-width="3"/>
+                    <line x1="65" y1="30" x2="90" y2="30" stroke="currentColor" stroke-width="3"/>
+                  </svg>
+                  <h3>Gerbang NOT</h3>
+                </div>
+                <p>Membalik nilai masukan tunggal; hanya memiliki satu input.</p>
+                <table class="truth-table">
+                  <thead><tr><th>A</th><th>Out</th></tr></thead>
+                  <tbody>
+                    <tr><td>0</td><td>1</td></tr>
+                    <tr><td>1</td><td>0</td></tr>
+                  </tbody>
+                </table>
+              </article>
+
+              <article class="gate-card">
+                <div class="gate-card-head">
+                  <svg class="gate-symbol" viewBox="0 0 100 60" aria-hidden="true">
+                    <path d="M20 10 H45 A20 20 0 0 1 45 50 H20 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+                    <circle cx="68" cy="30" r="5" fill="none" stroke="currentColor" stroke-width="3"/>
+                    <line x1="0" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="3"/>
+                    <line x1="0" y1="40" x2="20" y2="40" stroke="currentColor" stroke-width="3"/>
+                    <line x1="73" y1="30" x2="90" y2="30" stroke="currentColor" stroke-width="3"/>
+                  </svg>
+                  <h3>Gerbang NAND</h3>
+                </div>
+                <p>Kebalikan dari AND — keluaran 0 hanya jika semua masukan 1.</p>
+                <table class="truth-table">
+                  <thead><tr><th>A</th><th>B</th><th>Out</th></tr></thead>
+                  <tbody>
+                    <tr><td>0</td><td>0</td><td>1</td></tr>
+                    <tr><td>0</td><td>1</td><td>1</td></tr>
+                    <tr><td>1</td><td>0</td><td>1</td></tr>
+                    <tr><td>1</td><td>1</td><td>0</td></tr>
+                  </tbody>
+                </table>
+              </article>
+
+              <article class="gate-card">
+                <div class="gate-card-head">
+                  <svg class="gate-symbol" viewBox="0 0 100 60" aria-hidden="true">
+                    <path d="M15 10 Q30 30 15 50 Q40 50 55 30 Q40 10 15 10 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+                    <circle cx="60" cy="30" r="5" fill="none" stroke="currentColor" stroke-width="3"/>
+                    <line x1="0" y1="20" x2="17" y2="20" stroke="currentColor" stroke-width="3"/>
+                    <line x1="0" y1="40" x2="17" y2="40" stroke="currentColor" stroke-width="3"/>
+                    <line x1="65" y1="30" x2="90" y2="30" stroke="currentColor" stroke-width="3"/>
+                  </svg>
+                  <h3>Gerbang NOR</h3>
+                </div>
+                <p>Kebalikan dari OR — keluaran 1 hanya jika semua masukan 0.</p>
+                <table class="truth-table">
+                  <thead><tr><th>A</th><th>B</th><th>Out</th></tr></thead>
+                  <tbody>
+                    <tr><td>0</td><td>0</td><td>1</td></tr>
+                    <tr><td>0</td><td>1</td><td>0</td></tr>
+                    <tr><td>1</td><td>0</td><td>0</td></tr>
+                    <tr><td>1</td><td>1</td><td>0</td></tr>
+                  </tbody>
+                </table>
+              </article>
+
+              <article class="gate-card">
+                <div class="gate-card-head">
+                  <svg class="gate-symbol" viewBox="0 0 100 60" aria-hidden="true">
+                    <path d="M14 10 Q29 30 14 50 Q39 50 54 30 Q39 10 14 10 Z" fill="none" stroke="currentColor" stroke-width="3"/>
+                    <path d="M8 10 Q23 30 8 50" fill="none" stroke="currentColor" stroke-width="3"/>
+                    <line x1="0" y1="20" x2="10" y2="20" stroke="currentColor" stroke-width="3"/>
+                    <line x1="0" y1="40" x2="10" y2="40" stroke="currentColor" stroke-width="3"/>
+                    <line x1="54" y1="30" x2="90" y2="30" stroke="currentColor" stroke-width="3"/>
+                  </svg>
+                  <h3>Gerbang XOR</h3>
+                </div>
+                <p>Keluaran 1 jika jumlah masukan bernilai 1 adalah <strong>ganjil</strong> (kedua input berbeda).</p>
+                <table class="truth-table">
+                  <thead><tr><th>A</th><th>B</th><th>Out</th></tr></thead>
+                  <tbody>
+                    <tr><td>0</td><td>0</td><td>0</td></tr>
+                    <tr><td>0</td><td>1</td><td>1</td></tr>
+                    <tr><td>1</td><td>0</td><td>1</td></tr>
+                    <tr><td>1</td><td>1</td><td>0</td></tr>
+                  </tbody>
+                </table>
+              </article>
+
+            </div>
+          </div>
+
+          <!-- ---------- PANEL: KUIS ---------- -->
+          <!-- id="kuis" ditaruh di sini juga supaya link sidebar "Kuis" bisa scroll langsung ke panel ini -->
+          <div class="tab-panel hidden" id="panelKuis" role="tabpanel" aria-labelledby="btnKuis">
+            <div id="kuis"></div>
+            <!-- Soal kuis di-generate otomatis oleh script.js dari array quizData -->
+            <div id="quizContainer" class="quiz-container"></div>
+            <button id="btnCekJawaban" class="btn-primary">Cek Jawaban</button>
+            <div id="quizResult" class="quiz-result" aria-live="polite"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <p>&copy; 2026 SMK Negeri 56 — Jurusan Mekatronika</p>
+      </footer>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
